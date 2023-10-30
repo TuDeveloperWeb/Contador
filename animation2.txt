@@ -1,0 +1,62 @@
+<template>
+  <div class="container">
+    <div :class="{'icon': true, 'clicked': isClicked}" @click="handleClick"></div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      isClicked: false,
+    };
+  },
+  methods: {
+    handleClick() {
+      this.isClicked = true;
+    },
+  },
+  mounted() {
+    // Iniciar la animación automáticamente al cargar la página
+    setTimeout(() => {
+      this.isClicked = false;
+    }, 1000); // Mantener la animación durante 1 segundo (ajusta el tiempo según tus necesidades)
+  },
+};
+</script>
+
+<style scoped>
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.icon {
+  width: 100px;
+  height: 100px;
+  background-color: #3498db;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  animation: jump 0.6s ease infinite; /* Inicia la animación automáticamente al cargar la página */
+}
+
+.clicked {
+  animation: none; /* Detiene la animación cuando se hace clic */
+  transform: translateY(0) !important; /* Detiene la transformación */
+}
+
+@keyframes jump {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}
+</style>
